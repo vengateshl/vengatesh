@@ -1,0 +1,98 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-08-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+      "workspaceName": {
+          "type": "string",
+		  "defaultValue": "vengat",
+          "metadata": {
+            "description": "Name of the workspace."
+          }
+      },
+      "sku": {
+          "type": "string",
+		  "defaultValue": "pergb2018",
+          "allowedValues": [
+            "pergb2018",
+            "Free",
+            "Standalone",
+            "PerNode",
+            "Standard",
+            "Premium"
+            ],
+          "defaultValue": "pergb2018",
+          "metadata": {
+          "description": "Pricing tier: PerGB2018 or legacy tiers (Free, Standalone, PerNode, Standard or Premium) which are not available to all customers."
+          }
+        },
+        "location": {
+          "type": "string",
+		   "defaultValue": "centralus",
+          "allowedValues": [
+          "australiacentral", 
+          "australiaeast", 
+          "australiasoutheast", 
+          "brazilsouth",
+          "canadacentral", 
+          "centralindia", 
+          "centralus", 
+          "eastasia", 
+          "eastus", 
+          "eastus2", 
+          "francecentral", 
+          "japaneast", 
+          "koreacentral", 
+          "northcentralus", 
+          "northeurope", 
+          "southafricanorth", 
+          "southcentralus", 
+          "southeastasia",
+          "switzerlandnorth",
+          "switzerlandwest",
+          "uksouth", 
+          "ukwest", 
+          "westcentralus", 
+          "westeurope", 
+          "westus", 
+          "westus2" 
+          ],
+          "metadata": {
+              "description": "Specifies the location for the workspace."
+              }
+        },
+        "retentionInDays": {
+          "type": "int",
+          "defaultValue": 120,
+          "metadata": {
+            "description": "Number of days to retain data."
+          }
+        },
+        "resourcePermissions": {
+          "type": "bool",
+		  "defaultValue": true,
+          "metadata": {
+            "description": "true to use resource or workspace permissions. false to require workspace permissions."
+          }
+      }
+
+      },
+      "resources": [
+      {
+          "type": "Microsoft.OperationalInsights/workspaces",
+          "name": "vengat",
+          "apiVersion": "2020-08-01",
+          "location": "centralus",
+          "properties": {
+              "sku": {
+                  "name": "pergb2018"
+              },
+              "retentionInDays": "50",
+              "features": {
+                  "searchVersion": 1,
+                  "legacy": 0,
+                  "enableLogAccessUsingOnlyResourcePermissions": "true"
+              }
+          }
+      }
+  ]
+}
